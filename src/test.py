@@ -1,4 +1,4 @@
-from src.topsort import Graph
+from topsort import Graph
 
 pp_max_len = 50
 
