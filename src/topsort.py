@@ -17,17 +17,24 @@ class Graph:
         self.relationships = None
         self.nodes = None
         
-        if rels_input:
-            self._load_graph(rels_input)
-        else:
+        if rels_input is None:
             user_input = input("Enter the relationships: ")
             self._load_graph(user_input)
+        else:
+            self._load_graph(rels_input)
 
     def _print_debug(self, fstr):
         if self.debug:
             print(f"[DEBUG] {fstr}")
     
     def _load_graph(self, input):
+        if input == "":
+            self.relationships = []
+            self.nodes = set()
+            self.graph = {}
+            self.deps = {}
+            return
+        
         # Generate the relationships and list of nodes from the graph input
         self.relationships  = [x.strip() for x in input.split(",")]
         self.nodes = Graph.rels_to_nodes(">".join(self.relationships))
